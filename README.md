@@ -1,10 +1,10 @@
-# Empty project
+# SCP - Containment Breach (RBFX Port)
 
-This is empty project that used [the Framework](https://github.com/rbfx/rbfx) as submodule.
+This is a port of the game SCP - Containment Breach into the RBFX framework. This project is an attempt to have more stability and better modding tools.
 
-It demonstrates the absolute minimum of code that is necessary to render something on the screen on Desktop platforms.
+This game and the source code are licensed under Creative Commons Attribution-ShareAlike 3.0 License.
 
-Mobile and Web platforms have their quirks and require additional code to work.
+http://creativecommons.org/licenses/by-sa/3.0/
 
 ## Building the Project and the Framework from source
 
@@ -39,10 +39,10 @@ Check [documentation](https://rbfx.github.io/index.html) for build instructions.
 
 ## Running the Sample
 
-Just run `EmptyProject.exe` on Windows or `EmptyProject` on Linux.
+Just run `SCP-Containment-Breach.exe` on Windows or `SCP-Containment-Breach` on Linux.
 
 Make sure that `rbfx/bin/CoreData` is visible by the executable.
 It is usually copied automatically by CMake, but if it doesn't, you can copy it manually.
 
-Alternatively, you can run `EmptyProject` executable with `--pp path/to/bin` command line argument
+Alternatively, you can run `SCP-Containment-Breach` executable with `--pp path/to/bin` command line argument
 to specify the path to the directory containing `CoreData`.

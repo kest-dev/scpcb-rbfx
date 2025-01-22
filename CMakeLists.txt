@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project (EmptyProject)
+project (SCP-Containment-Breach)
 
 # C++17 is required for this project.
 set (CMAKE_CXX_STANDARD 17)
