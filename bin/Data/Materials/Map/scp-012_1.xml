@@ -1,0 +1,5 @@
+<material>
+        <technique name="Techniques/LitOpaque.xml" />
+        <shader vsdefines="LIGHTMAP" psdefines="LIGHTMAP" />
+        <texture unit="diffuse" name="Textures/Map/scp-012_1.jpg" />
+    </material>

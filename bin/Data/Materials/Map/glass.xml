@@ -1,0 +1,5 @@
+<material>
+        <technique name="Techniques/LitTransparent.xml" />
+        <shader vsdefines="LIGHTMAP TRANSPARENT" psdefines="LIGHTMAP TRANSPARENT" />
+        <texture unit="diffuse" name="Textures/Map/glass.png" />
+    </material>

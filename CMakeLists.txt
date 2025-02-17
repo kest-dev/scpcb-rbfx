@@ -27,9 +27,12 @@ else ()
     find_package(Urho3D REQUIRED)
 endif ()
 
-# Add plugins (optional).
-include_directories (${CMAKE_SOURCE_DIR}/Plugins)
-add_subdirectory (${CMAKE_SOURCE_DIR}/Plugins/Core.SamplePlugin)
-
 # Add project source files.
 add_subdirectory (${CMAKE_SOURCE_DIR}/Source)
+
+set (INSTALL_DATA_DIRS Data)
+foreach(dir ${INSTALL_DATA_DIRS})
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/bin/${dir} DESTINATION ${CMAKE_BINARY_DIR}/bin)
+    # /${dir}/../ trick is used for installing Autoload subdirs.
+    install (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/${dir} DESTINATION ${CMAKE_INSTALL_PREFIX}/${DEST_BIN_DIR}/${dir}/../)
+endforeach()

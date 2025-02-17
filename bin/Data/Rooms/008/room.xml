@@ -1,0 +1,7 @@
+<roomtemplate>
+	<room name="008" id="Room008" />
+	<roomshape shape="1" />
+	<probability value="0" />
+	<zone name="LCZ" />
+	<rmesh name="008/008_opt.rmesh" />
+</roomtemplate>
