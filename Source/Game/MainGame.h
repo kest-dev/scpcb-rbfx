@@ -23,8 +23,12 @@ public:
     void Deactivate() override;
 
 private:
+    void HandlePostRenderUpdate(StringHash eventType, VariantMap& eventData);
+
     SharedPtr<Scene> scene_;
     SharedPtr<Node> cameraNode_;
     SharedPtr<Room> testRoom_;
     SharedPtr<PlayerController> player_;
+
+    bool drawDebug_;
 };
