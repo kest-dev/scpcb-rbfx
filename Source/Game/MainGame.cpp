@@ -51,8 +51,8 @@ void MainGame::Activate(StringVariantMap &bundle)
     auto* zone = scene_->CreateComponent<Zone>();
     zone->SetBoundingBox(BoundingBox(-1000.0f, 1000.0f));
     zone->SetFogColor(Color::GRAY);
-    zone->SetFogStart(100.0f);
-    zone->SetFogEnd(300.0f);
+    zone->SetFogStart(15.0f);
+    zone->SetFogEnd(30.0f);
 
     scene_->CreateComponent<PhysicsWorld>();
 
