@@ -7,7 +7,7 @@
 #include <Urho3D/Scene/Scene.h>
 
 #include "../Map/Room.h"
-#include "../PlayerController.h"
+#include "../Entities/PlayerController.h"
 
 using namespace Urho3D;
 

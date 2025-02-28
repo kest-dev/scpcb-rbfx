@@ -5,7 +5,12 @@
 #include <Urho3D/Navigation/CrowdManager.h>
 #include <Urho3D/Navigation/CrowdAgent.h>
 #include <Urho3D/Graphics/DebugRenderer.h>
+#include <Urho3D/Input/Input.h>
 #include <Urho3D/DebugNew.h>
+#include <Urho3D/Physics/PhysicsWorld.h>
+
+#include "../Entities/NPCs/NPCtypeBase.h"
+#include "../Entities/NPCs/NPCtypeMTF.h"
 
 MainGame::MainGame(Context* context)
     : ApplicationState(context),
@@ -13,15 +18,29 @@ MainGame::MainGame(Context* context)
 {
     Room::RegisterObject(context);
     PlayerController::RegisterObject(context);
+    NPCtypeBase::RegisterObject(context);
+    NPCtypeMTF::RegisterObject(context);
 }
 
 void MainGame::HandlePostRenderUpdate(StringHash eventType, VariantMap& eventData)
 {
     auto* debug = scene_->GetComponent<DebugRenderer>();
 
+    auto* input = GetSubsystem<Input>();
+
+    if (input->GetKeyPress(KEY_SPACE))
     {
-        scene_->GetComponent<DynamicNavigationMesh>()->DrawDebugGeometry(true);
+        auto mtf = scene_->GetChild("MTF")->GetComponent<NPCtypeMTF>();
+        mtf->FindPath(player_->GetNode()->GetPosition());
     }
+
+    if (input->GetKeyPress(KEY_F3))
+    {
+        drawDebug_ = !drawDebug_;
+    }
+
+    if (drawDebug_)
+        scene_->GetComponent<DynamicNavigationMesh>()->DrawDebugGeometry(true);
 }
 
 void MainGame::Activate(StringVariantMap &bundle)
@@ -35,9 +54,11 @@ void MainGame::Activate(StringVariantMap &bundle)
     zone->SetFogStart(100.0f);
     zone->SetFogEnd(300.0f);
 
+    scene_->CreateComponent<PhysicsWorld>();
+
     Node* roomNode = scene_->CreateChild();
     testRoom_ = roomNode->CreateComponent<Room>();
-    testRoom_->LoadXML("Rooms/008/room.xml");
+    testRoom_->LoadXML("Rooms/173bright/room.xml");
 
     Node* playerNode = scene_->CreateChild();
     playerNode->SetPosition(Vector3::UP);
@@ -46,9 +67,12 @@ void MainGame::Activate(StringVariantMap &bundle)
     auto* navMesh = scene_->CreateComponent<DynamicNavigationMesh>();
     navMesh->SetAgentHeight(0.1f);
     navMesh->SetTileSize(32);
-    navMesh->SetCellSize(0.02f);
-    navMesh->SetAgentRadius(0.1f);
+    navMesh->SetCellSize(0.05f);
+    navMesh->SetCellHeight(0.05);
+    navMesh->SetAgentRadius(0.15f);
+    navMesh->SetAgentMaxClimb(0.4f);
     scene_->CreateComponent<Navigable>();
+    navMesh->SetPadding(Vector3(0.0f, 10.0f, 0.0f));
     navMesh->Rebuild();
 
     auto* crowdManager = scene_->CreateComponent<CrowdManager>();
@@ -60,17 +84,16 @@ void MainGame::Activate(StringVariantMap &bundle)
     params.adaptiveDepth = 3;
     crowdManager->SetObstacleAvoidanceParams(0, params);
 
+    auto* testNode = scene_->CreateChild("MTF");
+    auto testNPC = testNode->CreateComponent<NPCtypeMTF>();
+
     SubscribeToEvent(E_POSTRENDERUPDATE, URHO3D_HANDLER(MainGame, HandlePostRenderUpdate));
 }
 
 void MainGame::Update(float timeStep)
 {
-    auto* input = GetSubsystem<Input>();
 
-    if (input->GetKeyPress(KEY_SPACE))
-        drawDebug_ = !drawDebug_;
 }
-
 void MainGame::Deactivate()
 {
 
