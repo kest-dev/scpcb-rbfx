@@ -1,0 +1,5 @@
+<material>
+    <technique name="Techniques/LitOpaque.xml" />
+    <shader vsdefines="" psdefines="" />
+    <texture unit="diffuse" name="Textures/NPCs/MTF_newdiffuse02.jpg" />
+</material>
