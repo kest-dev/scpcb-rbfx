@@ -2,9 +2,7 @@
 
 This is a port of the game SCP - Containment Breach into the RBFX framework. This project is an attempt to have more stability and better modding tools.
 
-This game and the source code are licensed under Creative Commons Attribution-ShareAlike 3.0 License.
-
-http://creativecommons.org/licenses/by-sa/3.0/
+This game and the source code are licensed under [Creative Commons Attribution-ShareAlike 3.0 License](http://creativecommons.org/licenses/by-sa/3.0/).
 
 ## Building the Project and the Framework from source
 
