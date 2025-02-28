@@ -22,6 +22,7 @@ void App::Setup()
     engineParameters_[EP_APPLICATION_NAME] = "My Application";
     // conf:// directory is mapped to that writeable folder.
     engineParameters_[EP_LOG_NAME] = "conf://App.log";
+    engineParameters_[EP_SOUND] = true;
 
     // Register Object
     MainMenuRML::RegisterObject(context_);

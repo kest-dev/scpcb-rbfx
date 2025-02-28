@@ -89,6 +89,7 @@ bool RMesh::LoadFile(ea::string path)
 
         StaticModel* tempModel = node_->CreateComponent<StaticModel>();
         RigidBody* body = node_->CreateComponent<RigidBody>();
+        body->SetFriction(999.0f);
 
         CollisionShape* shape = node_->CreateComponent<CollisionShape>();
 
@@ -322,12 +323,13 @@ bool RMesh::LoadFile(ea::string path)
         tempModel->SetOccluder(true);
         tempModel->SetModel(model);
         tempModel->SetMaterial(material);
-        tempModel->SetLightMask(0x0);
+        tempModel->SetDrawDistance(16.0f);
 
         //Apply light map support
         tempModel->SetGlobalIlluminationType(GlobalIlluminationType::UseLightMap);
         tempModel->SetBakeLightmap(true);
         tempModel->SetLightmapIndex(i + lmIndex);
+        tempModel->SetLightMask(0);
 
         materials_.push_back(material);
         staticModels_.push_back(tempModel);
@@ -440,6 +442,7 @@ bool RMesh::LoadFile(ea::string path)
         //Apply the model and map texture to the static model
         tempModel->SetModel(model);
         tempModel->SetMaterial(invMaterial);
+        tempModel->SetLightMask(0);
 
         staticModels_.push_back(tempModel);
 
@@ -458,7 +461,7 @@ bool RMesh::LoadFile(ea::string path)
         {
             Vector3 pos = source->ReadVector3();// *ROOMSCALE;
 
-            float range = source->ReadFloat() / 175.0f;
+            float range = source->ReadFloat() / 75.0f;
             ea::string color = ReadBlitzString(source);
             float intensity = Min(source->ReadFloat() * 0.8f, 1.0f);
             Color tColor = ConvertStringToColor(color, intensity);
@@ -472,7 +475,7 @@ bool RMesh::LoadFile(ea::string path)
             light->SetColor(tColor);
             light->SetRange(range);
             light->SetCastShadows(true);
-            light->SetDrawDistance(25);
+            light->SetDrawDistance(5);
         }
         else if (entityType == "waypoint")
         {
